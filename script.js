@@ -190,16 +190,16 @@ function renderTableTournament(data) {
     data.forEach((row, i) => {
         let pos = row["POSICION"] || (i + 1);
         
-        // Evitar filas vacías o repetidas
         if(String(pos).includes("POSICION")) return;
 
-        // Si el excel no trae "TOTAL PTS", intenta buscar "TOTAL" o suma 0
         let total = row["TOTAL PTS"] || row["TOTAL"] || 0;
         let blader = row["BLADER"] || "";
+        // NUEVO: Obtener ID (asegúrate que en el Excel la columna se llame "ID" o "ID_JUGADOR")
+        let idJugador = row["ID"] || row["ID_JUGADOR"] || "-"; 
 
         html += `<tr>
             <td class="${pos <= 3 ? 'rank-' + pos : ''}">${pos}</td>
-            <td class="col-blader">${blader}</td>
+            <td class="col-id">${idJugador}</td> <td class="col-blader">${blader}</td>
             <td class="col-total" style="font-size: 1.2rem;">${total}</td>
         </tr>`;
     });
@@ -211,14 +211,18 @@ function renderTableTotals(data) {
     data.forEach(row => {
         let pos = row["POSICION"];
         if(!pos || String(pos).includes("POSICION")) return;
+        
+        let idJugador = row["ID"] || row["ID_JUGADOR"] || "-";
+
         html += `<tr>
             <td class="${pos<=3?'rank-'+pos:''}">${pos}</td>
+            <td class="col-id">${idJugador}</td>
             <td class="col-blader">${row["BLADER"]||""}</td>
             <td>${row["TORNEOS"]||0}</td>
             <td class="col-total">${row["TOTAL PTS"]||0}</td>
-            <td>${row["ORO"]==1?"🥇":""}</td>
-            <td>${row["PLATA"]==1?"🥈":""}</td>
-            <td>${row["BRONCE"]==1?"🥉":""}</td>
+            <td>${row["ORO"]||0}</td>
+            <td>${row["PLATA"]||0}</td>
+            <td>${row["BRONCE"]||0}</td>
         </tr>`;
     });
     document.getElementById('body-totals').innerHTML = html;

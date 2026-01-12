@@ -10,10 +10,11 @@ body {
     background-image: radial-gradient(circle at center, #1a0500 0%, #000000 100%);
     color: white;
     font-family: 'Roboto', sans-serif;
-    padding: 20px;
+    padding: 10px; /* Reduje padding general para ganar espacio en movil */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
 
 /* --- HEADER --- */
@@ -24,42 +25,68 @@ body {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto 10px auto; 
-    padding: 10px 20px;
+    padding: 10px;
     background: radial-gradient(ellipse at center, rgba(255, 90, 0, 0.05) 0%, rgba(0,0,0,0) 80%);
     border-bottom: 1px solid rgba(255, 90, 0, 0.2);
+    box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
 }
-.header-center { text-align: center; flex: 2; z-index: 2; }
+
+.header-center { 
+    text-align: center; 
+    flex: 2; 
+    z-index: 2; 
+    padding: 0 10px;
+}
 
 .side-logo { 
-    width: auto; max-height: 120px; 
+    width: auto; 
+    max-height: 150px; /* ANTES: 100px -> AHORA: 150px (Más grande) */
     filter: drop-shadow(0 0 5px rgba(255,90,0,0.4)); 
-    transition: opacity 0.5s ease; opacity: 0;
+    transition: opacity 0.5s ease; 
+    opacity: 0;
     animation: fadeIn 1s forwards;
+    display: block;
 }
 @keyframes fadeIn { to { opacity: 1; } }
 
-.main-nbl-logo { max-height: 90px; margin-bottom: 5px; }
+.main-nbl-logo { max-height: 80px; margin-bottom: 5px; }
+
 .league-title { 
-    font-family: 'Black Ops One', cursive; font-size: 2.5rem; line-height: 1; 
+    font-family: 'Black Ops One', cursive; 
+    font-size: 2.2rem; 
+    line-height: 1; 
     background: linear-gradient(to bottom, var(--fire-yellow), var(--fire-orange)); 
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-    text-transform: uppercase; filter: drop-shadow(0 0 10px rgba(255, 90, 0, 0.6)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    text-transform: uppercase; 
+    filter: drop-shadow(0 0 10px rgba(255, 90, 0, 0.6)); 
+    margin: 0;
 }
+
 .info-badge {
-    font-family: 'Russo One', sans-serif; font-size: 1rem; color: #aaa;
-    letter-spacing: 2px; margin-top: 5px; text-transform: uppercase;
+    font-family: 'Russo One', sans-serif; 
+    font-size: 0.9rem; 
+    color: #aaa;
+    letter-spacing: 2px; 
+    margin-top: 5px; 
+    text-transform: uppercase;
 }
 
 /* --- PESTAÑAS (TABS) --- */
 .tabs-wrapper {
-    width: 100%; max-width: 1200px; margin: 0 auto;
+    width: 100%; 
+    max-width: 1200px; 
+    margin: 0 auto;
     border-bottom: 2px solid #333;
     display: flex;
-    overflow-x: auto;
+    overflow-x: auto; /* Scroll horizontal habilitado */
+    -webkit-overflow-scrolling: touch; /* Suavidad en iPhone */
     gap: 5px;
     padding-bottom: 0;
 }
-.tabs-wrapper::-webkit-scrollbar { height: 5px; }
+
+/* Scrollbar personalizado para las pestañas */
+.tabs-wrapper::-webkit-scrollbar { height: 4px; }
 .tabs-wrapper::-webkit-scrollbar-thumb { background: var(--fire-orange); border-radius: 5px; }
 
 .tab-btn {
@@ -67,14 +94,15 @@ body {
     color: #888;
     border: 1px solid #333;
     border-bottom: none;
-    padding: 12px 25px;
+    padding: 10px 20px;
     font-family: 'Russo One', sans-serif;
     cursor: pointer;
-    white-space: nowrap;
+    white-space: nowrap; /* Evita que el texto baje de línea */
     transition: 0.3s;
     border-radius: 8px 8px 0 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
+    flex-shrink: 0; /* Evita que el botón se aplaste */
 }
 
 .tab-btn:hover { background: #222; color: white; }
@@ -90,14 +118,21 @@ body {
 
 /* Pestaña especial de Totales */
 .tab-total { 
-    margin-left: auto;
+    margin-left: auto; /* La empuja a la derecha en PC */
     border-color: #665500;
 }
 .tab-total.active { color: var(--fire-yellow); border-color: var(--fire-yellow); background: rgba(255, 210, 0, 0.05); }
 
 
 /* --- CONTENIDO --- */
-.content-wrapper { width: 100%; max-width: 1200px; margin: 20px auto; flex-grow: 1; min-height: 500px;}
+.content-wrapper { 
+    width: 100%; 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    flex-grow: 1; 
+    min-height: 500px;
+    padding-bottom: 50px; /* Espacio para scroll en celular */
+}
 
 .section-title {
     font-family: 'Russo One', sans-serif; color: white; font-size: 1.5rem;
@@ -117,20 +152,122 @@ body {
 .view-section.active { display: block; }
 @keyframes fadeInView { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* TABLA */
-.table-container { width: 100%; overflow-x: auto; border-radius: 8px; border: 1px solid #333; background: #111; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-table { width: 100%; border-collapse: collapse; min-width: 800px; }
+/* --- TABLA (SOLUCIÓN RESPONSIVA) --- */
+.table-container { 
+    width: 100%; 
+    overflow-x: auto; /* SCROLL HORIZONTAL CLAVE */
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px; 
+    border: 1px solid #333; 
+    background: #111; 
+    box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    min-width: 600px; /* Fuerza el ancho mínimo para que no se aplaste en cel */
+}
+
 thead { background: linear-gradient(90deg, #883300, #ff5a00); }
-th { font-family: 'Russo One', sans-serif; padding: 15px; font-size: 0.9rem; color: black; text-align: center; }
-td { padding: 12px; text-align: center; border-bottom: 1px solid #222; font-size: 0.95rem; color: #ddd; }
+th { font-family: 'Russo One', sans-serif; padding: 12px; font-size: 0.9rem; color: black; text-align: center; }
+td { padding: 10px; text-align: center; border-bottom: 1px solid #222; font-size: 0.95rem; color: #ddd; }
+
+/* Columna ID (Nueva) */
+.col-id {
+    font-family: monospace;
+    color: #666;
+    font-size: 0.85em;
+    width: 50px;
+}
 
 .rank-1 { color: #ffd700; font-weight: bold; font-size: 1.1rem; }
 .rank-2 { color: #c0c0c0; font-weight: bold; font-size: 1.1rem; }
 .rank-3 { color: #cd7f32; font-weight: bold; font-size: 1.1rem; }
-.col-blader { text-align: left; font-weight: bold; color: white; padding-left: 20px; }
+
+.col-blader { 
+    text-align: left; 
+    font-weight: bold; 
+    color: white; 
+    padding-left: 15px; 
+    min-width: 120px; /* Mínimo ancho para el nombre */
+}
+
 .col-total { color: var(--fire-yellow); font-weight: bold; background: rgba(255, 90, 0, 0.05); font-size: 1.1rem; }
 
 /* CHART */
-.chart-box { background: #111; padding: 20px; border-radius: 8px; border: 1px solid #333; height: 500px; }
+.chart-box { background: #111; padding: 10px; border-radius: 8px; border: 1px solid #333; height: 400px; } /* Ajusté padding y altura */
 .loading-msg { text-align: center; padding: 50px; color: #666; font-style: italic; }
 .error-msg { color: #ff4444; text-align: center; padding: 20px; }
+
+
+/* ==========================================================================
+   MEDIA QUERIES (VERSIÓN CELULAR)
+   ========================================================================== */
+/* ==========================================================================
+   MEDIA QUERIES (VERSIÓN CELULAR)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    
+    body { padding: 2px; } /* Aprovechar cada pixel */
+
+    /* Header y Títulos */
+    .header-banner { flex-direction: column; text-align: center; gap: 5px; }
+    .side-logo { max-height: 120px; margin: 0 auto; }
+    .league-title { font-size: 1.4rem; }
+    .section-title { font-size: 1rem; flex-direction: column; align-items: flex-start; }
+    .btn-toggle-chart { width: 100%; margin-top: 5px;}
+
+    /* --- TABLA TOTALMENTE AJUSTADA --- */
+    
+    .table-container {
+        overflow-x: hidden; /* Prohibido el scroll lateral */
+        border: none;
+    }
+
+    table { 
+        min-width: auto; /* Se encoge al tamaño del cel */
+        width: 100%; 
+        table-layout: auto; /* El navegador calcula los anchos óptimos */
+    }
+
+    /* Celdas General */
+    th, td { 
+        padding: 6px 1px; /* Relleno mínimo para que quepan las columnas */
+        font-size: 0.75rem; /* Letra pequeña pero legible (aprox 12px) */
+        text-align: center;
+        white-space: nowrap; /* Por defecto no envolver (para números) */
+    }
+
+    /* Columna ID */
+    .col-id { 
+        font-size: 0.65rem; 
+        color: #888; 
+        width: 25px; /* Muy angosta */
+    }
+
+    /* --- NOMBRE DEL BLADER (La clave) --- */
+    .col-blader { 
+        width: 35%; /* Le damos el 35% del ancho de pantalla */
+        white-space: normal; /* PERMITE SALTO DE LÍNEA */
+        line-height: 1.1;    /* Líneas pegaditas */
+        word-wrap: break-word; /* Rompe palabras si es necesario */
+        text-align: left;
+        padding-left: 4px;
+        font-size: 0.75rem;
+    }
+    
+    /* Totales y Medallas */
+    .col-total { 
+        font-weight: bold; 
+        color: var(--fire-yellow);
+        font-size: 0.8rem;
+    }
+
+    /* Encabezados más pequeños */
+    th { font-size: 0.7rem; padding: 5px 1px; }
+
+    /* Ajuste de Pestañas */
+    .tab-btn { padding: 8px 8px; font-size: 0.7rem; flex-grow: 1; text-align: center;}
+    .tab-total { margin-left: 0; } 
+}

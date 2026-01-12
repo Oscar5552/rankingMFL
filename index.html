@@ -41,19 +41,20 @@
         </div>
 
         <div id="view-tournament" class="view-section">
-            <div class="section-title">
-                <span id="tournament-title">RESULTADOS</span>
-            </div>
-            <div class="table-container">
-                <table id="table-tournament">
+            <h2 id="tournament-title">RESULTADOS</h2>
+
+            <div class="table-responsive">
+                <table class="styled-table">
                     <thead>
                         <tr>
-                            <th style="width: 50px;">#</th>
+                            <th>#</th>
+                            <th>ID</th>
                             <th>BLADER</th>
-                            <th>TOTAL PUNTOS</th>
+                            <th>PTS</th>
                         </tr>
                     </thead>
-                    <tbody id="body-tournament"></tbody>
+                    <tbody id="body-tournament">
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -67,16 +68,16 @@
             <div id="totals-table-container" class="table-container">
                 <table id="table-totals">
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>BLADER</th>
-                            <th>TORNEOS</th>
-                            <th>TOTAL PTS</th>
-                            <th>ORO</th>
-                            <th>PLATA</th>
-                            <th>BRONCE</th>
-                        </tr>
-                    </thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th> <th>BLADER</th>
+                    <th>TORNEOS</th>
+                    <th>TOTAL</th>
+                    <th>🥇</th>
+                    <th>🥈</th>
+                    <th>🥉</th>
+                </tr>
+            </thead>
                     <tbody id="body-totals"></tbody>
                 </table>
             </div>
