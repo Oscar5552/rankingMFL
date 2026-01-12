@@ -1,0 +1,136 @@
+:root {
+    --fire-orange: #ff5a00;
+    --fire-yellow: #ffd200;
+    --metal-dark: #111;
+    --bg-dark: #050505;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(circle at center, #1a0500 0%, #000000 100%);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- HEADER --- */
+.header-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto 10px auto; 
+    padding: 10px 20px;
+    background: radial-gradient(ellipse at center, rgba(255, 90, 0, 0.05) 0%, rgba(0,0,0,0) 80%);
+    border-bottom: 1px solid rgba(255, 90, 0, 0.2);
+}
+.header-center { text-align: center; flex: 2; z-index: 2; }
+
+.side-logo { 
+    width: auto; max-height: 120px; 
+    filter: drop-shadow(0 0 5px rgba(255,90,0,0.4)); 
+    transition: opacity 0.5s ease; opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+.main-nbl-logo { max-height: 90px; margin-bottom: 5px; }
+.league-title { 
+    font-family: 'Black Ops One', cursive; font-size: 2.5rem; line-height: 1; 
+    background: linear-gradient(to bottom, var(--fire-yellow), var(--fire-orange)); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+    text-transform: uppercase; filter: drop-shadow(0 0 10px rgba(255, 90, 0, 0.6)); 
+}
+.info-badge {
+    font-family: 'Russo One', sans-serif; font-size: 1rem; color: #aaa;
+    letter-spacing: 2px; margin-top: 5px; text-transform: uppercase;
+}
+
+/* --- PESTAÑAS (TABS) --- */
+.tabs-wrapper {
+    width: 100%; max-width: 1200px; margin: 0 auto;
+    border-bottom: 2px solid #333;
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    padding-bottom: 0;
+}
+.tabs-wrapper::-webkit-scrollbar { height: 5px; }
+.tabs-wrapper::-webkit-scrollbar-thumb { background: var(--fire-orange); border-radius: 5px; }
+
+.tab-btn {
+    background: #151515;
+    color: #888;
+    border: 1px solid #333;
+    border-bottom: none;
+    padding: 12px 25px;
+    font-family: 'Russo One', sans-serif;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+    border-radius: 8px 8px 0 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.tab-btn:hover { background: #222; color: white; }
+
+.tab-btn.active {
+    background: linear-gradient(to top, rgba(255,90,0,0.15), #151515);
+    color: var(--fire-orange);
+    border-color: var(--fire-orange);
+    border-bottom: 2px solid #050505;
+    margin-bottom: -2px;
+    z-index: 10;
+}
+
+/* Pestaña especial de Totales */
+.tab-total { 
+    margin-left: auto;
+    border-color: #665500;
+}
+.tab-total.active { color: var(--fire-yellow); border-color: var(--fire-yellow); background: rgba(255, 210, 0, 0.05); }
+
+
+/* --- CONTENIDO --- */
+.content-wrapper { width: 100%; max-width: 1200px; margin: 20px auto; flex-grow: 1; min-height: 500px;}
+
+.section-title {
+    font-family: 'Russo One', sans-serif; color: white; font-size: 1.5rem;
+    margin-bottom: 15px; border-left: 5px solid var(--fire-orange); padding-left: 15px; 
+    text-transform: uppercase; display: flex; align-items: center; justify-content: space-between;
+}
+
+.btn-toggle-chart {
+    background: transparent; border: 1px solid var(--fire-yellow); color: var(--fire-yellow);
+    padding: 5px 15px; font-family: 'Russo One', sans-serif; cursor: pointer; font-size: 0.8rem;
+    border-radius: 20px; transition: 0.3s;
+}
+.btn-toggle-chart:hover { background: var(--fire-yellow); color: black; }
+
+/* Vistas */
+.view-section { display: none; animation: fadeInView 0.3s ease-out; }
+.view-section.active { display: block; }
+@keyframes fadeInView { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* TABLA */
+.table-container { width: 100%; overflow-x: auto; border-radius: 8px; border: 1px solid #333; background: #111; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+table { width: 100%; border-collapse: collapse; min-width: 800px; }
+thead { background: linear-gradient(90deg, #883300, #ff5a00); }
+th { font-family: 'Russo One', sans-serif; padding: 15px; font-size: 0.9rem; color: black; text-align: center; }
+td { padding: 12px; text-align: center; border-bottom: 1px solid #222; font-size: 0.95rem; color: #ddd; }
+
+.rank-1 { color: #ffd700; font-weight: bold; font-size: 1.1rem; }
+.rank-2 { color: #c0c0c0; font-weight: bold; font-size: 1.1rem; }
+.rank-3 { color: #cd7f32; font-weight: bold; font-size: 1.1rem; }
+.col-blader { text-align: left; font-weight: bold; color: white; padding-left: 20px; }
+.col-total { color: var(--fire-yellow); font-weight: bold; background: rgba(255, 90, 0, 0.05); font-size: 1.1rem; }
+
+/* CHART */
+.chart-box { background: #111; padding: 20px; border-radius: 8px; border: 1px solid #333; height: 500px; }
+.loading-msg { text-align: center; padding: 50px; color: #666; font-style: italic; }
+.error-msg { color: #ff4444; text-align: center; padding: 20px; }

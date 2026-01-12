@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MFL 2026 - Browser Mode</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="header-banner">
+        <div class="header-side">
+            <img src="MFL.png" class="side-logo" style="opacity: 1;">
+        </div>
+        <div class="header-center">
+            <img src="NBL.png" class="main-nbl-logo">
+            <div class="league-title">MFL 2026</div>
+            <div id="header-subtitle" class="info-badge">CARGANDO DATOS...</div>
+        </div>
+        <div class="header-side">
+            <img id="venue-logo" src="" class="side-logo" style="opacity: 0;">
+        </div>
+    </header>
+
+    <div class="tabs-wrapper" id="tabs-container">
+    </div>
+
+    <div class="content-wrapper">
+
+        <div id="view-loading" class="view-section active">
+            <div class="loading-msg">📥 Descargando todos los torneos... Por favor espera.</div>
+        </div>
+
+        <div id="view-tournament" class="view-section">
+            <div class="section-title">
+                <span id="tournament-title">RESULTADOS</span>
+            </div>
+            <div class="table-container">
+                <table id="table-tournament">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th>BLADER</th>
+                            <th>TOTAL PUNTOS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-tournament"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="view-totals" class="view-section">
+            <div class="section-title">
+                CLASIFICACIÓN GENERAL
+                <button class="btn-toggle-chart" onclick="toggleChart()">📊 VER GRÁFICA / TABLA</button>
+            </div>
+
+            <div id="totals-table-container" class="table-container">
+                <table id="table-totals">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>BLADER</th>
+                            <th>TORNEOS</th>
+                            <th>TOTAL PTS</th>
+                            <th>ORO</th>
+                            <th>PLATA</th>
+                            <th>BRONCE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-totals"></tbody>
+                </table>
+            </div>
+
+            <div id="totals-chart-container" class="chart-box" style="display:none;">
+                <canvas id="pointsChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
