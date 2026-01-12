@@ -2,8 +2,9 @@
 //  CONFIGURACIÓN
 // ==========================================
 const listaArchivos = [
+    "TORNEO MINOR PAREJAS 04.01.2026 A.xlsx",
     "TORNEO LOCAL 11.01.2026 A.xlsx",
-    "TORNEO MINOR PAREJAS 11.01.2026 A.xlsx",
+    
     // Agrega nuevos aquí...
 ];
 const RUTA_CARPETA = './torneos/';
