@@ -7,6 +7,7 @@ const listaArchivos = [
     
     // Agrega nuevos aquí...
 ];
+// NOTA: Asegúrate de que 'MNBCS.png' esté dentro de esta carpeta también
 const RUTA_CARPETA = './torneos/';
 // ==========================================
 
@@ -20,7 +21,8 @@ document.addEventListener('DOMContentLoaded', initSystem);
 
 async function initSystem() {
     // 1. Mostrar carga
-    document.getElementById('view-loading').classList.add('active');
+    const loadingView = document.getElementById('view-loading');
+    if (loadingView) loadingView.classList.add('active');
 
     try {
         // 2. DESCARGAR TODO DE GOLPE (Paralelo)
@@ -51,8 +53,8 @@ async function initSystem() {
         const tabs = document.querySelectorAll('.tab-btn');
         if (tabs.length > 0) {
             // Clic en la penúltima (último torneo) o última (General)
-            // Si quieres que inicie en GENERAL siempre, usa: loadTotalsView(tabs[tabs.length-1]);
-            // Si quieres el último torneo:
+            // Si quieres que inicie en GENERAL siempre, usa: showTotalsView(tabs[tabs.length-1]);
+            // Por ahora mantenemos la lógica de ir al último torneo jugado:
             const ultimoTorneoBtn = tabs[tabs.length - 2]; // -2 porque el ultimo es General
             if(ultimoTorneoBtn) ultimoTorneoBtn.click(); 
             else tabs[tabs.length - 1].click(); // Si no hay torneos, click en General
@@ -60,13 +62,14 @@ async function initSystem() {
 
     } catch (error) {
         console.error(error);
-        document.querySelector('.loading-msg').innerHTML = 
-            `❌ Error cargando archivos.<br>Verifica que los nombres en 'listaArchivos' coinciden con la carpeta.<br>Detalle: ${error.message}`;
+        const msg = document.querySelector('.loading-msg');
+        if(msg) msg.innerHTML = `❌ Error cargando archivos.<br>Verifica que los nombres en 'listaArchivos' coinciden con la carpeta.<br>Detalle: ${error.message}`;
     }
 }
 
 function renderTabs() {
     const container = document.getElementById('tabs-container');
+    if (!container) return;
     container.innerHTML = '';
 
     // A) Pestañas de Torneos
@@ -114,7 +117,9 @@ function showTotalsView(btn) {
     renderChart(totalesCache);
 
     document.getElementById('header-subtitle').innerText = "TEMPORADA 2026 - ACUMULADO";
-    updateLogo('NONE');
+    
+    // >>> AQUÍ ESTÁ EL CAMBIO: Llamamos al logo especial de MNBCS <<<
+    updateLogo('GENERAL'); 
 
     // Resetear toggle gráfica
     isChartVisible = false;
@@ -133,10 +138,13 @@ function activateTab(btn) {
 
 function switchView(id) {
     // Ocultar loading y todas las vistas
-    document.getElementById('view-loading').classList.remove('active');
+    const loading = document.getElementById('view-loading');
+    if(loading) loading.classList.remove('active');
+    
     document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
     // Mostrar la deseada
-    document.getElementById(id).classList.add('active');
+    const target = document.getElementById(id);
+    if(target) target.classList.add('active');
 }
 
 // Lee metadatos del nombre de archivo
@@ -167,11 +175,20 @@ async function fetchExcel(path) {
 
 function updateLogo(sedeCode) {
     const img = document.getElementById('venue-logo');
+    if(!img) return;
+
     img.style.opacity = '0';
     setTimeout(() => {
+        // Lógica de Sedes
         if(sedeCode === 'A') img.src = RUTA_CARPETA + 'Arlequin.png';
         else if(sedeCode === 'F') img.src = RUTA_CARPETA + 'frikiPlaza.jpg';
+        
+        // >>> NUEVO CASO: Logo MNBCS para la vista General <<<
+        else if(sedeCode === 'GENERAL') img.src = RUTA_CARPETA + 'MNBCS.png';
+        
         else { img.src = ''; return; }
+        
+        // Fade in al cargar
         img.onload = () => { img.style.opacity = '1'; };
     }, 200);
 }
@@ -184,7 +201,7 @@ function toggleChart() {
     chart.style.display = isChartVisible ? 'block' : 'none';
 }
 
-// --- RENDERIZADO TABLAS (Igual que antes) ---
+// --- RENDERIZADO TABLAS ---
 function renderTableTournament(data) {
     let html = "";
     data.forEach((row, i) => {
@@ -194,7 +211,6 @@ function renderTableTournament(data) {
 
         let total = row["TOTAL PTS"] || row["TOTAL"] || 0;
         let blader = row["BLADER"] || "";
-        // NUEVO: Obtener ID (asegúrate que en el Excel la columna se llame "ID" o "ID_JUGADOR")
         let idJugador = row["ID"] || row["ID_JUGADOR"] || "-"; 
 
         html += `<tr>
