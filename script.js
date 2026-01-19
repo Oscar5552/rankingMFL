@@ -4,6 +4,7 @@
 const listaArchivos = [
     "TORNEO MINOR PAREJAS 04.01.2026 A.xlsx",
     "TORNEO LOCAL 11.01.2026 A.xlsx",
+    "TORNEO RETO DE LIGA 19.01.2026 A.xlsx",
     
     // Agrega nuevos aquí...
 ];
@@ -245,28 +246,43 @@ function renderTableTotals(data) {
 }
 
 function renderChart(data) {
+    // 1. Limpiar y ordenar datos
     const clean = data.filter(d => d["BLADER"] && d["TOTAL PTS"]!=undefined && d["POSICION"]!="POSICION");
     clean.sort((a,b) => b["TOTAL PTS"] - a["TOTAL PTS"]);
-    const top = clean.slice(0, 20);
+    
+    // CAMBIO AQUÍ: Antes decía clean.slice(0, 20). 
+    // Al quitar .slice, pasamos la lista completa.
+    const allData = clean; 
 
     const ctx = document.getElementById('pointsChart').getContext('2d');
     if(chartInstance) chartInstance.destroy();
 
+    // Ajuste opcional: Si son muchos jugadores, forzamos un ancho mínimo para que se pueda hacer scroll
+    // (Esto requiere que el contenedor CSS permita scroll, si no, se verán muy apretados)
+    
     chartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: top.map(d => d["BLADER"]),
+            labels: allData.map(d => d["BLADER"]),
             datasets: [{
                 label: 'PUNTOS',
-                data: top.map(d => d["TOTAL PTS"]),
-                backgroundColor: top.map((d, i) => i<3?['#ffd700','#c0c0c0','#cd7f32'][i]:'#ff5a00')
+                data: allData.map(d => d["TOTAL PTS"]),
+                // Mantenemos el color especial para el Top 3
+                backgroundColor: allData.map((d, i) => i<3 ? ['#ffd700','#c0c0c0','#cd7f32'][i] : '#ff5a00')
             }]
         },
         options: {
-            responsive: true, maintainAspectRatio: false,
+            responsive: true, 
+            maintainAspectRatio: false,
             plugins: { legend: {display:false} },
             scales: { 
-                x: { ticks: {color:'white', font:{weight:'bold'}} },
+                x: { 
+                    ticks: {
+                        color:'white', 
+                        font:{weight:'bold'},
+                        autoSkip: false // Esto fuerza a mostrar TODOS los nombres aunque se encimen
+                    } 
+                },
                 y: { ticks: {color:'#888'}, grid:{color:'#333'} }
             }
         }
