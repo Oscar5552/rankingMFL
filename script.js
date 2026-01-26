@@ -5,6 +5,7 @@ const listaArchivos = [
     "TORNEO MINOR PAREJAS 04.01.2026 A.xlsx",
     "TORNEO LOCAL 11.01.2026 A.xlsx",
     "TORNEO RETO DE LIGA 19.01.2026 A.xlsx",
+    "TORNEO LOCAL 25.01.2026 A.xlsx",
     
     // Agrega nuevos aquí...
 ];
