@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M. Fama League - Inicio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>SGL League</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
         /* Ajuste Logo NBL más grande */
         .nbl-endorsement img {
             height: 60px !important;
             width: auto;
         }
-        
+
+        .nbl-endorsement {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(106, 27, 154, 0.1);
+            /* Fondo morado sutil */
+            border: 1px solid var(--primary-purple);
+            /* Borde morado */
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+        }
+
         /* Botones de Redes Sociales */
         .social-bar {
             display: flex;
@@ -23,6 +40,7 @@
             margin-top: 20px;
             margin-bottom: 20px;
         }
+
         .social-btn {
             display: flex;
             align-items: center;
@@ -34,31 +52,59 @@
             border: 1px solid #333;
             color: #aaa;
             transition: all 0.3s ease;
-            text-decoration: none; /* Asegura que no tenga subrayado */
+            text-decoration: none;
         }
+
         .social-btn:hover {
             transform: translateY(-3px);
-            border-color: var(--fire-orange);
+            border-color: var(--accent-cyan);
+            /* Cambio a cian en hover general */
             color: white;
-            box-shadow: 0 0 15px rgba(255, 90, 0, 0.4);
+            box-shadow: 0 0 15px rgba(0, 242, 234, 0.4);
+            /* Resplandor cian */
         }
+
         .social-btn svg {
             width: 22px;
             height: 22px;
-            fill: currentColor; /* Esto colorea el icono según el texto */
+            fill: currentColor;
         }
+
         /* Colores específicos al hacer hover */
-        .social-btn.tiktok:hover { background: #000; border-color: #00f2ea; color: #ff0050; }
-        .social-btn.fb:hover { background: #1877f2; border-color: #1877f2; color: white; }
-        .social-btn.insta:hover { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); border-color: #dc2743; color: white; }
+        .social-btn.tiktok:hover {
+            background: #000;
+            border-color: var(--accent-cyan);
+            /* Uso de la variable cian */
+            color: #ff0050;
+        }
+
+        .social-btn.fb:hover {
+            background: #1877f2;
+            border-color: #1877f2;
+            color: white;
+        }
+
+        .social-btn.insta:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-color: #dc2743;
+            color: white;
+        }
     </style>
 </head>
+
 <body>
 
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">MFL <span>2026</span></a>
-            <ul class="nav-links">
+            <a href="index.html" class="nav-logo">
+                <img src="SGL.png" alt="Logo SGL" class="sgl-logo sgl-logo--nav">
+                SGL <span>2026</span>
+            </a>
+            <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+                <i data-lucide="menu"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                
                 <li><a href="index.html" class="active">Inicio</a></li>
                 <li><a href="rankings.html">Ranking</a></li>
                 <li><a href="reglas.html">Reglas</a></li>
@@ -68,57 +114,64 @@
     </nav>
 
     <header class="hero">
-        
+
         <div class="nbl-endorsement">
             <img src="NBL.png" alt="NBL Logo">
             <span>OFFICIAL NBL MEMBER</span>
         </div>
         <br>
 
-        <img src="MFL.png" alt="Logo MFL" class="hero-main-logo">
-        
-        <h1 class="hero-title">M. FAMA LEAGUE</h1>
-        
+        <img src="SGL.png" alt="Logo SGL" class="hero-main-logo sgl-logo sgl-logo--hero">
+
+        <h1 class="hero-title">SMASH GOATS LEAGUE</h1>
+
         <div class="hero-subtitle">LIGA COMPETITIVA DE BEYBLADE | QUERÉTARO</div>
-        
+
         <p style="color: #aaa; max-width: 600px; margin: 20px auto; font-size: 1.1rem; line-height: 1.6;">
-            El escenario definitivo para los Bladers. Nos especializamos en el metajuego en torneos <strong>3G</strong>, pero desafiamos tus habilidades con formatos alternativos y dinámicas únicas.
+            El escenario definitivo para los Bladers. Nos especializamos en el metajuego en torneos <strong>3G</strong>,
+            pero desafiamos tus habilidades con formatos alternativos y dinámicas únicas.
         </p>
-        
+
         <a href="rankings.html" class="hero-btn">VER CLASIFICACIÓN</a>
     </header>
 
     <div class="content-wrapper" style="margin-top: 0;">
-        
+
         <div class="rules-grid">
-            
-            <div class="rule-card" onclick="window.location.href='rankings.html'" style="cursor:pointer; transition: transform 0.3s;">
+
+            <div class="rule-card" onclick="window.location.href='rankings.html'"
+                style="cursor:pointer; transition: transform 0.3s;">
                 <i data-lucide="trophy" class="rule-icon"></i>
-                <h3 style="margin:0; color:white; font-family:'Russo One'">RANKING MFL</h3>
-                <p style="color:#666; font-size:0.9rem;">Consulta la tabla de posiciones, estadísticas y medallas de nuestros Bladers esta temporada.</p>
+                <h3 style="margin:0; color:white; font-family:'Russo One'">RANKING SGL</h3>
+                <p style="color:#666; font-size:0.9rem;">Consulta la tabla de posiciones, estadísticas y medallas de
+                    nuestros Bladers esta temporada.</p>
             </div>
 
-            <div class="rule-card" onclick="window.location.href='reglas.html'" style="cursor:pointer; transition: transform 0.3s;">
+            <div class="rule-card" onclick="window.location.href='reglas.html'"
+                style="cursor:pointer; transition: transform 0.3s;">
                 <i data-lucide="swords" class="rule-icon"></i>
                 <h3 style="margin:0; color:white; font-family:'Russo One'">REGLAMENTOS</h3>
                 <p style="color:#666; font-size:0.9rem;">Normativa base para 3G.</p>
             </div>
 
-            <div class="rule-card" onclick="window.location.href='calendario.html'" style="cursor:pointer; transition: transform 0.3s;">
+            <div class="rule-card" onclick="window.location.href='calendario.html'"
+                style="cursor:pointer; transition: transform 0.3s;">
                 <i data-lucide="calendar" class="rule-icon"></i>
                 <h3 style="margin:0; color:white; font-family:'Russo One'">PRÓXIMOS TORNEOS</h3>
-                <p style="color:#666; font-size:0.9rem;">Fechas, sedes y formatos de juego para los siguientes encuentros.</p>
+                <p style="color:#666; font-size:0.9rem;">Fechas, sedes y formatos de juego para los siguientes
+                    encuentros.</p>
             </div>
         </div>
 
-        <div class="rule-card highlight" style="margin-top: 30px; border-color: var(--fire-yellow); box-shadow: 0 0 20px rgba(255, 210, 0, 0.15); cursor: default;">
+        <div class="rule-card highlight"
+            style="margin-top: 30px; border-color: var(--fire-yellow); box-shadow: 0 0 20px rgba(0, 247, 255, 0.15); cursor: default;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
                 <h2 style="font-family:'Russo One'; margin:0; color:var(--fire-yellow);">TIPOS DE TORNEO</h2>
                 <i data-lucide="crown" class="rule-icon" style="color:var(--fire-yellow); margin:0;"></i>
             </div>
-            
+
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                
+
                 <div style="background: #080808; padding: 15px; border-radius: 6px; border-left: 4px solid #444;">
                     <h3 style="font-family:'Russo One'; color:#aaa; font-size:1.1rem; margin-top:0;">MINOR & LOCAL</h3>
                     <p style="font-size:0.9rem; color:#888; margin:5px 0;">
@@ -130,13 +183,16 @@
                     </ul>
                 </div>
 
-                <div style="background: linear-gradient(135deg, rgba(255,90,0,0.1), #080808); padding: 15px; border-radius: 6px; border-left: 4px solid var(--fire-orange);">
-                    <h3 style="font-family:'Russo One'; color:var(--fire-orange); font-size:1.1rem; margin-top:0;">RETO DE LIGA & COPA</h3>
+                <div
+                    style="background: linear-gradient(135deg, rgba(124, 25, 245, 0.1), #080808); padding: 15px; border-radius: 6px; border-left: 4px solid var(--accent-cyan);">
+                    <h3 style="font-family:'Russo One'; color:var(--accent-cyan); font-size:1.1rem; margin-top:0;">RETO
+                        DE LIGA & COPA</h3>
                     <p style="font-size:0.9rem; color:#ccc; margin:5px 0;">
                         Eventos especiales de alta competencia. Únicamente formato competitivo oficial.
                         Se alteran RETO DE LIGA & COPA una vez por mes.
                     </p>
-                    <div style="margin-top:10px; background: rgba(255, 210, 0, 0.1); padding: 5px 10px; border-radius: 4px; display:inline-block;">
+                    <div
+                        style="margin-top:10px; background: rgba(114, 35, 225, 0.426); padding: 5px 10px; border-radius: 4px; display:inline-block;">
                         <span style="color:var(--fire-yellow); font-family:'Russo One'; font-size: 0.85rem;">
                             ★ OTORGAN MUCHOS MÁS PUNTOS
                         </span>
@@ -148,33 +204,112 @@
 
     </div>
 
-    <footer style="text-align:center; padding: 40px 20px; color: #444; font-size: 0.8rem; background: #080808; border-top: 1px solid #222;">
+    <div class="content-wrapper" style="margin-top: 60px; margin-bottom: 60px;">
+    <div class="section-title" style="border-left-color: var(--primary-purple); margin-bottom: 40px;">
+        NUESTROS ALIADOS
+        <span style="font-size:0.8rem; font-family:'Roboto'; color:#666;">PATROCINADORES & SEDES OFICIALES</span>
+    </div>
+
+    <div class="rules-grid" style="gap: 40px;">
         
+        <div class="rule-card highlight" style="border-color: var(--primary-purple); display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px;">
+            <div style="height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                <img src="MFLB.png" alt="Maldita Fama" 
+                     style="max-height: 100%; width: auto; filter: drop-shadow(0 0 25px rgba(106, 27, 154, 0.8)); animation: floatLogo 5s ease-in-out infinite;">
+            </div>
+            <h2 style="font-family:'Russo One'; color:white; margin:0; font-size: 1.5rem;">Maldita Fama Barber Shop</h2>
+            <p style="color:#aaa; font-size:1rem; margin: 15px 0; max-width: 300px;">Av. Felipe Ángeles 152, Felipe Angeles, 76150 Santiago de Querétaro, Qro.</p>
+            
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <a href="https://maps.app.goo.gl/dGWdcbPnD9tgb3oW8" target="_blank" class="btn-map" style="padding: 10px 25px;">
+                    <i data-lucide="map-pin"></i> VER MAPA
+                </a>
+                <a href="https://www.instagram.com/malditafamabs?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn insta" style="width: 45px; height: 45px;">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="rule-card highlight" style="border-color: var(--accent-cyan); display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px;">
+            <div style="height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                <img src="torneos/Arlequin.png" alt="Arlequin TCG" 
+                     style="max-height: 100%; width: auto; filter: drop-shadow(0 0 25px rgba(0, 242, 234, 0.8)); animation: floatLogo 5s ease-in-out infinite; animation-delay: 1s;">
+            </div>
+            <h2 style="font-family:'Russo One'; color:white; margin:0; font-size: 1.5rem;">Arlequin TCG</h2>
+            <p style="color:#aaa; font-size:1rem; margin: 15px 0; max-width: 300px;">Plaza Quintanal C/ 15 de Mayo 176, Centro, 76020 Santiago de Querétaro, Qro.</p>
+            
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <a href="https://maps.app.goo.gl/TPRfS6XBTx8h1xEe8" target="_blank" class="btn-map" style="padding: 10px 25px;">
+                    <i data-lucide="map-pin"></i> VER MAPA
+                </a>
+                <a href="https://www.instagram.com/arlequin.tcg?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-btn insta" style="width: 45px; height: 45px;">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    <footer
+        style="text-align:center; padding: 40px 20px; color: #444; font-size: 0.8rem; background: #080808; border-top: 1px solid #222;">
+
         <div style="margin-bottom: 20px;">
-            <p style="color: var(--fire-orange); font-family: 'Russo One'; margin-bottom: 15px; font-size: 0.9rem;">SÍGUENOS EN</p>
+            <p style="color: var(--accent-cyan); font-family: 'Russo One'; margin-bottom: 15px; font-size: 0.9rem;">
+                SÍGUENOS EN</p>
             <div class="social-bar">
-                <a href="https://www.tiktok.com/@m.fama.league.nbl" target="_blank" class="social-btn tiktok" title="TikTok">
-                    <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-                </a>
-                
-                <a href="https://www.facebook.com/m.famaleague" target="_blank" class="social-btn fb" title="Facebook">
-                    <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                </a>
-                
-                <a href="https://www.instagram.com/m.famaleagueqro" target="_blank" class="social-btn insta" title="Instagram">
+                <a href="https://www.tiktok.com/@m.fama.league.nbl" target="_blank" class="social-btn tiktok"
+                    title="TikTok">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        <path
+                            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.facebook.com/m.famaleague" target="_blank" class="social-btn fb" title="Facebook">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                    </svg>
+                </a>
+
+                <a href="https://www.instagram.com/m.famaleagueqro" target="_blank" class="social-btn insta"
+                    title="Instagram">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                 </a>
             </div>
         </div>
 
-        <p>M. FAMA LEAGUE 2026<br>
-        <span style="font-size: 0.7rem; color: #666;">Afiliada a Night Blade League (NBL)</span></p>
+        <p>SMASH GOATS LEAGUE 2026<br>
+            <span style="font-size: 0.7rem; color: #666;">Afiliada a Night Blade League (NBL)</span>
+        </p>
     </footer>
 
     <script>
+        // Mobile nav toggle
+        (function () {
+            const nav = document.querySelector('.main-nav');
+            const btn = document.getElementById('nav-toggle');
+            if (!nav || !btn) return;
+
+            btn.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('is-open');
+                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            nav.querySelectorAll('.nav-links a').forEach(a => {
+                a.addEventListener('click', () => {
+                    if (!nav.classList.contains('is-open')) return;
+                    nav.classList.remove('is-open');
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+
         lucide.createIcons();
     </script>
 </body>
+
 </html>

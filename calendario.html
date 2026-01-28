@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MFL 2026 - Calendario</title>
+    <title>SGL 2026 - Calendario</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
@@ -41,9 +41,9 @@
 
         .social-btn:hover {
             transform: translateY(-3px);
-            border-color: var(--fire-orange);
+            border-color: var(--accent-cyan);
             color: white;
-            box-shadow: 0 0 15px rgba(255, 90, 0, 0.4);
+            box-shadow: 0 0 15px rgba(0, 242, 234, 0.4);
         }
 
         .social-btn svg {
@@ -52,24 +52,336 @@
             fill: currentColor;
         }
 
-        /* Colores específicos al hacer hover */
-        .social-btn.tiktok:hover {
-            background: #000;
-            border-color: #00f2ea;
-            color: #ff0050;
+        .social-btn.tiktok:hover { background: #000; border-color: var(--accent-cyan); color: #ff0050; }
+        .social-btn.fb:hover { background: #1877f2; border-color: #1877f2; color: white; }
+        .social-btn.insta:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-color: #dc2743; color: white; }
+
+        /* --- MONTH LIST VIEW (REEMPLAZO DEL CALENDARIO) --- */
+
+        .cal-month-header {
+            max-width: 1200px;
+            margin: 0 auto 18px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: linear-gradient(90deg, rgba(26, 11, 46, 0.9), rgba(0, 0, 0, 0.9));
+            box-shadow: 0 0 30px rgba(0,0,0,0.35);
         }
 
-        .social-btn.fb:hover {
-            background: #1877f2;
-            border-color: #1877f2;
-            color: white;
+        .cal-month-sub {
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: #888;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Russo One', sans-serif;
         }
 
-        .social-btn.insta:hover {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            border-color: #dc2743;
+        .month-title {
+            font-family: 'Black Ops One', cursive;
+            font-size: 2rem;
             color: white;
+            text-transform: uppercase;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(106, 27, 154, 0.5);
         }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-cyan);
+            color: black;
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+
+        .cal-layout {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cal-list {
+            background: rgba(0,0,0,0.15);
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 12px;
+            min-height: 400px;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .cal-card {
+            background: #050505;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.25);
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cal-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: baseline;
+        }
+
+        .cal-card-title {
+            margin: 0;
+            font-family: 'Russo One', sans-serif;
+            color: white;
+            text-transform: uppercase;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+
+        .cal-card-date {
+            font-family: monospace;
+            color: #f3f3f3;
+            font-size: 0.85rem;
+            white-space: nowrap;
+
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid #2a2a2a;
+            padding: 6px 10px;
+            border-radius: 999px;
+        }
+
+        .cal-card-meta {
+            margin-top: 8px;
+            color: #d0d0d0;
+            font-size: 0.9rem;
+        }
+
+        .cal-card-location {
+            margin-top: 6px;
+            color: #a9a9a9;
+            font-size: 0.85rem;
+            line-height: 1.2;
+        }
+
+        .cal-card-img-wrap {
+            width: 100%;
+            height: 240px;
+            margin-top: 12px;
+            border-radius: 10px;
+            background: #080808;
+            border: 1px solid #222;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cal-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0.95;
+            transform: scale(1);
+            transform-origin: center;
+        }
+
+        /* Escalar solo ciertos tipos para que se vean más grandes */
+        .cal-card-img-wrap--local .cal-card-img,
+        .cal-card-img-wrap--reto .cal-card-img,
+        .cal-card-img-wrap--copa .cal-card-img {
+            transform: scale(1.35);
+        }
+
+        .cal-card-actions {
+            margin-top: auto;
+            padding-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid #333;
+            color: white;
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-family: 'Russo One', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cal-link.primary {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .cal-link:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(0, 242, 234, 0.12);
+        }
+
+        .cal-empty {
+            padding: 16px;
+            border: 1px dashed #333;
+            border-radius: 12px;
+            color: #777;
+            text-align: center;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .cal-empty.big {
+            padding: 22px;
+            font-size: 1.05rem;
+        }
+
+
+        /* --- MODAL FLYER (CENTRADO + RESPONSIVE) --- */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.82);
+            z-index: 9999;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: min(92vw, 560px);
+            max-height: calc(100vh - 36px);
+            overflow: auto;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid #222;
+            background: #050505;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 38px;
+            height: 38px;
+            border-radius: 999px;
+            border: 1px solid #333;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(0, 242, 234, 0.15);
+        }
+
+        .flyer-image {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid #222;
+            background: #0a0a0a;
+        }
+
+        .modal-location-box {
+            margin-top: 14px;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .location-text {
+            margin: 8px 0 12px 0;
+            color: #cfcfcf;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .cal-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .cal-list {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cal-month-header {
+                padding: 14px;
+            }
+
+            .month-title {
+                font-size: 1.5rem;
+            }
+
+            .cal-card {
+                padding: 12px;
+            }
+
+            .cal-card-title {
+                font-size: 0.95rem;
+            }
+
+            .cal-card-img-wrap {
+                height: 280px;
+            }
+
+            .modal-overlay {
+                padding: 12px;
+            }
+
+            .modal-content {
+                width: 94vw;
+                max-height: calc(100vh - 24px);
+                padding: 12px;
+            }
+
+            .flyer-image {
+                max-height: 66vh;
+            }
+        }
+
     </style>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -78,8 +390,14 @@
 
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">MFL <span>2026</span></a>
-            <ul class="nav-links">
+            <a href="index.html" class="nav-logo">
+                <img src="SGL.png" alt="Logo SGL" class="sgl-logo sgl-logo--nav">
+                SGL <span>2026</span>
+            </a>
+            <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+                <i data-lucide="menu"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="rankings.html">Ranking</a></li>
                 <li><a href="reglas.html">Reglas</a></li>
@@ -94,62 +412,19 @@
             <span style="font-size:0.8rem; font-family:'Roboto'; color:#666;">TEMPORADA 2026</span>
         </div>
 
-        <div style="max-width: 800px; margin: 0 auto;">
-
-            <div class="event-card" style="cursor: pointer;"
-                onclick="openFlyer('04-enero-2026.png', 'Arlequín - Plaza Quintanal, Local 31', 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw')">
-                <div class="event-date">04 <span>ENE</span></div>
-                <div class="event-info">
-                    <h3>TORNEO MINOR PAREJAS</h3>
-                    <p>Sede: Arlequín | Formato: 3G </p>
-                </div>
-                <div class="status-badge status-done">FINALIZADO</div>
+        <div class="cal-month-header">
+            <button class="nav-btn" id="btnPrevMonth" aria-label="Mes anterior"><i data-lucide="chevron-left"></i></button>
+            <div>
+                <h2 class="month-title" id="currentMonthDisplay">ENERO 2026</h2>
+                <div class="cal-month-sub">Selecciona un mes para ver los eventos</div>
             </div>
+            <button class="nav-btn" id="btnNextMonth" aria-label="Mes siguiente"><i data-lucide="chevron-right"></i></button>
+        </div>
 
-            <div class="event-card" style="cursor: pointer;"
-                onclick="openFlyer('11-enero-2026.jpeg', 'Arlequín - Plaza Quintanal, Local 31', 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw')">
-                <div class="event-date">11 <span>ENE</span></div>
-                <div class="event-info">
-                    <h3>TORNEO LOCAL</h3>
-                    <p>Sede: Arlequín | Formato: 3G</p>
-                </div>
-                <div class="status-badge status-done">FINALIZADO</div>
-            </div>
-
-            <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
-
-            <div class="event-card" style="border-left-color: var(--fire-orange); cursor: pointer;"
-                onclick="openFlyer('18-enero-2026.png', 'Arlequín - Plaza Quintanal, Local 31', 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw')">
-                <div class="event-date">18 <span>ENE</span></div>
-                <div class="event-info">
-                    <h3 style="color: var(--fire-orange);">TORNEO RETO DE LIGA</h3>
-                    <p>Sede: Arlequín | Formato: 3G</p>
-                </div>
-                <div class="status-badge status-done">FINALIZADO</div>
-            </div>
-
-            <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
-
-            <div class="event-card" style="border-left-color: var(--fire-orange); cursor: pointer;"
-                onclick="openFlyer('24-enero-2026.jpg', 'Arlequín - Plaza Alameda', 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7')">
-                <div class="event-date">24 <span>ENE</span></div>
-                <div class="event-info">
-                    <h3 style="color: var(--fire-orange);">TORNEO DE CHILL</h3>
-                    <p>Sede: Arlequín | Formato: por definir</p>
-                </div>
-                <div class="status-badge status-upcoming">PRÓXIMAMENTE</div>
-            </div>
-
-            <div class="event-card" style="border-left-color: var(--fire-orange); cursor: pointer;"
-                onclick="openFlyer('25-enero-2026.jpg', 'Arlequín - Plaza Quintanal, Local 31', 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw')">
-                <div class="event-date">25 <span>ENE</span></div>
-                <div class="event-info">
-                    <h3 style="color: var(--fire-orange);">TORNEO LOCAL</h3>
-                    <p>Sede: Arlequín | Formato: 3G</p>
-                </div>
-                <div class="status-badge status-upcoming">PRÓXIMAMENTE</div>
-            </div>
-
+        <div class="cal-layout">
+            <section class="cal-list" id="monthEvents">
+                <div class="cal-empty">Cargando eventos...</div>
+            </section>
         </div>
     </div>
 
@@ -160,10 +435,10 @@
             <img id="modal-img" src="" alt="Flyer del Torneo" class="flyer-image">
 
             <div class="modal-location-box">
-                <div class="location-title">UBICACIÓN</div>
+                <div class="location-title" style="color: var(--accent-cyan);">UBICACIÓN</div>
                 <p id="modal-location-text" class="location-text">Cargando ubicación...</p>
 
-                <a id="modal-map-btn" href="#" target="_blank" class="btn-map">
+                <a id="modal-map-btn" href="#" target="_blank" class="btn-map" style="border-color: var(--primary-purple);">
                     <i data-lucide="map-pin"></i> VER EN GOOGLE MAPS
                 </a>
             </div>
@@ -174,7 +449,7 @@
         style="text-align:center; padding: 40px 20px; color: #444; font-size: 0.8rem; background: #080808; border-top: 1px solid #222;">
 
         <div style="margin-bottom: 20px;">
-            <p style="color: var(--fire-orange); font-family: 'Russo One'; margin-bottom: 15px; font-size: 0.9rem;">
+            <p style="color: var(--accent-cyan); font-family: 'Russo One'; margin-bottom: 15px; font-size: 0.9rem;">
                 SÍGUENOS EN</p>
             <div class="social-bar">
                 <a href="https://www.tiktok.com/@m.fama.league.nbl" target="_blank" class="social-btn tiktok"
@@ -201,7 +476,7 @@
             </div>
         </div>
 
-        <p>M. FAMA LEAGUE 2026<br>
+        <p>SMASH GOATS LEAGUE 2026<br>
             <span style="font-size: 0.7rem; color: #666;">Afiliada a Night Blade League (NBL)</span>
         </p>
     </footer>
@@ -209,39 +484,254 @@
     <script>
         lucide.createIcons();
 
-        // --- LÓGICA DEL MODAL ---
+        // --- DATA ---
+        const eventos = [
+            {
+                fecha: '2026-01-04',
+                titulo: 'TORNEO MINOR PAREJAS',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'FINALIZADO',
+                flyer: '04-enero-2026.png',
+                ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
+                color: 'var(--accent-cyan)'
+            },
+            {
+                fecha: '2026-01-11',
+                titulo: 'TORNEO LOCAL',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'FINALIZADO',
+                flyer: '11-enero-2026.jpeg',
+                ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
+                color: '#888'
+            },
+            {
+                fecha: '2026-01-18',
+                titulo: 'TORNEO RETO DE LIGA',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'FINALIZADO',
+                flyer: '18-enero-2026.png',
+                ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
+                color: 'var(--accent-cyan)'
+            },
+            {
+                fecha: '2026-01-24',
+                titulo: 'TORNEO DE CHILL',
+                sede: 'Arlequín',
+                formato: 'Por definir',
+                estado: 'FINALIZADO',
+                flyer: '24-enero-2026.jpg',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7',
+                color: 'var(--primary-purple)'
+            },
+            {
+                fecha: '2026-01-25',
+                titulo: 'TORNEO LOCAL',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'FINALIZADO',
+                flyer: '25-enero-2026.jpg',
+                ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
+                color: 'var(--primary-purple)'
+            }
+        ];
+
+        function formatShortDate(iso) {
+            const [y, m, d] = iso.split('-');
+            return `${d}/${m}/${y}`;
+        }
+
+        function parseISOToDate(iso) {
+            const [y, m, d] = iso.split('-').map(n => parseInt(n, 10));
+            return new Date(y, m - 1, d);
+        }
+
+        function monthKeyFromDate(date) {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            return `${y}-${m}`;
+        }
+
+        function formatMonthTitle(key) {
+            const [y, mStr] = key.split('-');
+            const m = parseInt(mStr, 10) - 1;
+            const monthNames = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
+            return `${monthNames[m]} ${y}`;
+        }
+
+        function getTypeImage(titulo) {
+            const info = getEventTypeInfo(titulo);
+            return info.img || '';
+        }
+
+        let currentMonthKey = null;
+
+        function getAllMonthKeys() {
+            const keys = eventos
+                .map(e => monthKeyFromDate(parseISOToDate(e.fecha)))
+                .sort();
+            return [...new Set(keys)];
+        }
+
+        function shiftMonthKey(key, delta) {
+            const [yStr, mStr] = key.split('-');
+            const d = new Date(parseInt(yStr, 10), parseInt(mStr, 10) - 1, 1);
+            d.setMonth(d.getMonth() + delta);
+            return monthKeyFromDate(d);
+        }
+
+        function renderMonthList() {
+            const titleEl = document.getElementById('currentMonthDisplay');
+            const listEl = document.getElementById('monthEvents');
+
+            if (!titleEl || !listEl) return;
+            if (!currentMonthKey) currentMonthKey = getAllMonthKeys()[0] || monthKeyFromDate(new Date());
+
+            titleEl.textContent = formatMonthTitle(currentMonthKey);
+
+            const monthEvents = eventos
+                .filter(e => monthKeyFromDate(parseISOToDate(e.fecha)) === currentMonthKey)
+                .sort((a, b) => a.fecha.localeCompare(b.fecha));
+
+            if (monthEvents.length === 0) {
+                listEl.innerHTML = '<div class="cal-empty big">No hay eventos programados para este mes.</div>';
+                return;
+            }
+
+            listEl.innerHTML = monthEvents.map(ev => {
+                const safeFlyer = (ev.flyer || '').replace(/'/g, "\\'");
+                const safeUbic = (ev.ubicacion || '').replace(/'/g, "\\'");
+                const safeMapa = (ev.mapa || '').replace(/'/g, "\\'");
+                const typeInfo = getEventTypeInfo(ev.titulo);
+                const typeImg = typeInfo.img || '';
+                const typeKey = typeInfo.key || 'default';
+
+                return `
+                    <article class="cal-card">
+                        <div class="cal-card-top">
+                            <h3 class="cal-card-title">${ev.titulo}</h3>
+                            <div class="cal-card-date">${formatShortDate(ev.fecha)}</div>
+                        </div>
+                        <div class="cal-card-meta">${ev.sede} | ${ev.formato} ${ev.estado ? `| ${ev.estado}` : ''}</div>
+                        ${ev.ubicacion ? `<div class="cal-card-location">${ev.ubicacion}</div>` : ''}
+                        ${typeImg ? `
+                            <div class="cal-card-img-wrap cal-card-img-wrap--${typeKey}">
+                                <img class="cal-card-img" src="${typeImg}" alt="Tipo de torneo" onerror="this.parentNode && this.parentNode.remove()">
+                            </div>
+                        ` : ''}
+                        <div class="cal-card-actions">
+                            <button class="cal-link primary" onclick="openFlyer('${safeFlyer}', '${safeUbic}', '${safeMapa}')">
+                                <i data-lucide="image"></i> Ver flyer
+                            </button>
+                            <a class="cal-link" href="${ev.mapa || 'https://maps.google.com'}" target="_blank" rel="noopener">
+                                <i data-lucide="map-pin"></i> Mapa
+                            </a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            if (window.lucide && window.lucide.createIcons) {
+                window.lucide.createIcons();
+            }
+        }
+
+        function getEventTypeInfo(titulo) {
+            const t = (titulo || '').toUpperCase();
+
+            // Imágenes de tipo esperadas en la raíz del sitio:
+            // minor.png, local.png, reto.png, copa.png, chill.png
+            // Nota: si falta el archivo, la imagen se oculta automáticamente (onerror -> remove).
+
+            if (t.includes('MINOR')) return { key: 'minor', label: 'Minor', img: 'minor.png' };
+            if (t.includes('LOCAL')) return { key: 'local', label: 'Local', img: 'local.png' };
+            if (t.includes('RETO')) return { key: 'reto', label: 'Reto de Liga', img: 'reto.png' };
+            if (t.includes('COPA')) return { key: 'copa', label: 'Copa', img: 'copa.png' };
+            if (t.includes('CHILL')) return { key: 'chill', label: 'Chill', img: 'chill.png' };
+
+            return { key: 'default', label: 'Torneo', img: '' };
+        }
+
+        function initCalendar() {
+            const keys = getAllMonthKeys();
+            currentMonthKey = keys[0] || monthKeyFromDate(new Date());
+
+            const prevBtn = document.getElementById('btnPrevMonth');
+            const nextBtn = document.getElementById('btnNextMonth');
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentMonthKey = shiftMonthKey(currentMonthKey, -1);
+                    renderMonthList();
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentMonthKey = shiftMonthKey(currentMonthKey, 1);
+                    renderMonthList();
+                });
+            }
+
+            renderMonthList();
+        }
+
+        // --- MODAL LOGIC (Preserved) ---
         function openFlyer(imageName, locationName, mapUrl) {
             const modal = document.getElementById('flyer-modal');
             const img = document.getElementById('modal-img');
             const locText = document.getElementById('modal-location-text');
             const mapBtn = document.getElementById('modal-map-btn');
 
-            // 1. Construir ruta de la imagen
-            // Asegúrate de que la carpeta 'flayers-torneos' exista junto a este HTML
             img.src = 'flayers-torneos/' + imageName;
 
-            // Manejo de error si no existe la imagen
             img.onerror = function () {
                 this.src = 'https://via.placeholder.com/500x600?text=No+Flyer+Available';
             };
 
-            // 2. Poner datos de ubicación
             locText.innerText = locationName;
             mapBtn.href = mapUrl || 'https://maps.google.com';
 
-            // 3. Mostrar modal
             modal.classList.add('active');
         }
 
         function closeFlyer(e) {
-            // Cierra si das click en el botón X o en el fondo oscuro (overlay)
-            // pero NO si das click dentro del contenido (la tarjeta blanca/negra)
             if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('close-modal')) {
                 document.getElementById('flyer-modal').classList.remove('active');
-                // Limpiar src para que no parpadee la imagen vieja al abrir otro
                 setTimeout(() => { document.getElementById('modal-img').src = ''; }, 300);
             }
         }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', initCalendar);
+
+        // Mobile nav toggle
+        (function () {
+            const nav = document.querySelector('.main-nav');
+            const btn = document.getElementById('nav-toggle');
+            if (!nav || !btn) return;
+
+            btn.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('is-open');
+                btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            nav.querySelectorAll('.nav-links a').forEach(a => {
+                a.addEventListener('click', () => {
+                    if (!nav.classList.contains('is-open')) return;
+                    nav.classList.remove('is-open');
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
+
     </script>
 </body>
 

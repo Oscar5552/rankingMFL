@@ -186,7 +186,7 @@ function updateLogo(sedeCode) {
         else if(sedeCode === 'F') img.src = RUTA_CARPETA + 'frikiPlaza.jpg';
         
         // >>> NUEVO CASO: Logo MNBCS para la vista General <<<
-        else if(sedeCode === 'GENERAL') img.src = RUTA_CARPETA + 'MFL.png';
+        else if(sedeCode === 'GENERAL') img.src = RUTA_CARPETA + 'SGL.png';
         
         else { img.src = ''; return; }
         
