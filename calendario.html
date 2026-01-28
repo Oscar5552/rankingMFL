@@ -52,9 +52,23 @@
             fill: currentColor;
         }
 
-        .social-btn.tiktok:hover { background: #000; border-color: var(--accent-cyan); color: #ff0050; }
-        .social-btn.fb:hover { background: #1877f2; border-color: #1877f2; color: white; }
-        .social-btn.insta:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-color: #dc2743; color: white; }
+        .social-btn.tiktok:hover {
+            background: #000;
+            border-color: var(--accent-cyan);
+            color: #ff0050;
+        }
+
+        .social-btn.fb:hover {
+            background: #1877f2;
+            border-color: #1877f2;
+            color: white;
+        }
+
+        .social-btn.insta:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-color: #dc2743;
+            color: white;
+        }
 
         /* --- MONTH LIST VIEW (REEMPLAZO DEL CALENDARIO) --- */
 
@@ -69,7 +83,7 @@
             border: 1px solid #333;
             border-radius: 12px;
             background: linear-gradient(90deg, rgba(26, 11, 46, 0.9), rgba(0, 0, 0, 0.9));
-            box-shadow: 0 0 30px rgba(0,0,0,0.35);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
         }
 
         .cal-month-sub {
@@ -117,7 +131,7 @@
         }
 
         .cal-list {
-            background: rgba(0,0,0,0.15);
+            background: rgba(0, 0, 0, 0.15);
             border: 1px solid #222;
             border-radius: 12px;
             padding: 12px;
@@ -133,7 +147,7 @@
             border: 1px solid #222;
             border-radius: 12px;
             padding: 14px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.25);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 
             display: flex;
             flex-direction: column;
@@ -203,11 +217,24 @@
         }
 
         /* Escalar solo ciertos tipos para que se vean más grandes */
-        .cal-card-img-wrap--local .cal-card-img,
+       
         .cal-card-img-wrap--reto .cal-card-img,
         .cal-card-img-wrap--copa .cal-card-img {
             transform: scale(1.35);
         }
+
+        .cal-card-img-wrap--reto .cal-card-img,
+        .cal-card-img-wrap--copa .cal-card-img {
+            transform: scale(1.70);
+        }
+
+        .cal-card-img-wrap--chill .cal-card-img {
+            transform: scale(1.25);
+        }
+        
+         .cal-card-img-wrap--local .cal-card-img {
+            transform: scale(1.45);
+         }
 
         .cal-card-actions {
             margin-top: auto;
@@ -382,6 +409,36 @@
             }
         }
 
+        .cal-day-badge {
+            background: #6a1b9a;
+            color: white;
+            font-family: 'Russo One', sans-serif;
+            /* Cambiado a Russo para mejor legibilidad con letras */
+            font-size: 1rem;
+            /* Un poco más pequeño para que quepa bien el mes */
+            padding: 6px 10px;
+            border-radius: 8px;
+            min-width: 65px;
+            /* Más ancho para el formato DD/Mes */
+            text-align: center;
+            border: 1px solid #9c4dcc;
+            box-shadow: 0 0 10px rgba(106, 27, 154, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        /* Ajuste del contenedor del título para que el badge luzca bien */
+        .cal-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center;
+            /* Alineado al centro para que el badge resalte */
+            margin-bottom: 5px;
+        }
     </style>
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -394,7 +451,8 @@
                 <img src="SGL.png" alt="Logo SGL" class="sgl-logo sgl-logo--nav">
                 SGL <span>2026</span>
             </a>
-            <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+            <button id="nav-toggle" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"
+                aria-controls="nav-links">
                 <i data-lucide="menu"></i>
             </button>
             <ul class="nav-links" id="nav-links">
@@ -413,12 +471,14 @@
         </div>
 
         <div class="cal-month-header">
-            <button class="nav-btn" id="btnPrevMonth" aria-label="Mes anterior"><i data-lucide="chevron-left"></i></button>
+            <button class="nav-btn" id="btnPrevMonth" aria-label="Mes anterior"><i
+                    data-lucide="chevron-left"></i></button>
             <div>
                 <h2 class="month-title" id="currentMonthDisplay">ENERO 2026</h2>
                 <div class="cal-month-sub">Selecciona un mes para ver los eventos</div>
             </div>
-            <button class="nav-btn" id="btnNextMonth" aria-label="Mes siguiente"><i data-lucide="chevron-right"></i></button>
+            <button class="nav-btn" id="btnNextMonth" aria-label="Mes siguiente"><i
+                    data-lucide="chevron-right"></i></button>
         </div>
 
         <div class="cal-layout">
@@ -438,7 +498,8 @@
                 <div class="location-title" style="color: var(--accent-cyan);">UBICACIÓN</div>
                 <p id="modal-location-text" class="location-text">Cargando ubicación...</p>
 
-                <a id="modal-map-btn" href="#" target="_blank" class="btn-map" style="border-color: var(--primary-purple);">
+                <a id="modal-map-btn" href="#" target="_blank" class="btn-map"
+                    style="border-color: var(--primary-purple);">
                     <i data-lucide="map-pin"></i> VER EN GOOGLE MAPS
                 </a>
             </div>
@@ -486,66 +547,161 @@
 
         // --- DATA ---
         const eventos = [
+            // --- ENERO ---
             {
                 fecha: '2026-01-04',
                 titulo: 'TORNEO MINOR PAREJAS',
+                tipo: 'MINOR',
                 sede: 'Arlequín',
                 formato: '3G',
                 estado: 'FINALIZADO',
                 flyer: '04-enero-2026.png',
                 ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
-                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
-                color: 'var(--accent-cyan)'
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw'
             },
             {
                 fecha: '2026-01-11',
                 titulo: 'TORNEO LOCAL',
+                tipo: 'LOCAL',
                 sede: 'Arlequín',
                 formato: '3G',
                 estado: 'FINALIZADO',
                 flyer: '11-enero-2026.jpeg',
                 ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
-                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
-                color: '#888'
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw'
             },
             {
                 fecha: '2026-01-18',
                 titulo: 'TORNEO RETO DE LIGA',
+                tipo: 'RETO',
                 sede: 'Arlequín',
                 formato: '3G',
                 estado: 'FINALIZADO',
                 flyer: '18-enero-2026.png',
                 ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
-                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
-                color: 'var(--accent-cyan)'
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw'
             },
             {
                 fecha: '2026-01-24',
                 titulo: 'TORNEO DE CHILL',
+                tipo: 'CHILL',
                 sede: 'Arlequín',
                 formato: 'Por definir',
                 estado: 'FINALIZADO',
                 flyer: '24-enero-2026.jpg',
                 ubicacion: 'Arlequín - Plaza Alameda',
-                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7',
-                color: 'var(--primary-purple)'
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
             },
             {
                 fecha: '2026-01-25',
                 titulo: 'TORNEO LOCAL',
+                tipo: 'LOCAL',
                 sede: 'Arlequín',
                 formato: '3G',
                 estado: 'FINALIZADO',
                 flyer: '25-enero-2026.jpg',
                 ubicacion: 'Arlequín - Plaza Quintanal, Local 31',
-                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw',
-                color: 'var(--primary-purple)'
+                mapa: 'https://maps.app.goo.gl/pwQcajpqQXnUoZP3A?g_st=aw'
+            },
+
+            // --- FEBRERO (En Plaza Alameda) ---
+            {
+                fecha: '2026-02-01',
+                titulo: 'DUPLAS O TERCIAS CHILL',
+                tipo: 'CHILL',
+                sede: 'Arlequín',
+                formato: 'NO RANKED',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
+            },
+            {
+                fecha: '2026-02-08',
+                titulo: 'DINÁMICO RANKED',
+                tipo: 'MINOR',
+                sede: 'Arlequín',
+                formato: 'Dinámico',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
+            },
+            {
+                fecha: '2026-02-15',
+                titulo: 'COPA 3G',
+                tipo: 'COPA',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
+            },
+            {
+                fecha: '2026-02-22',
+                titulo: 'RANKED 3G LOCAL',
+                tipo: 'LOCAL',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
+            },
+
+            // --- MARZO (En Plaza Alameda) ---
+            {
+                fecha: '2026-03-01',
+                titulo: 'TERCIAS O DUPLAS CHILL',
+                tipo: 'CHILL',
+                sede: 'Arlequín',
+                formato: 'NO RANKED',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
+            },
+            {
+                fecha: '2026-03-08',
+                titulo: '3G RETO LIGA',
+                tipo: 'RETO',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
+            },
+            {
+                fecha: '2026-03-15',
+                titulo: 'DINÁMICA RANKED',
+                tipo: 'MINOR',
+                sede: 'Arlequín',
+                formato: 'Dinámico',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
+            },
+            {
+                fecha: '2026-03-22',
+                titulo: '3G RANKED LOCAL',
+                tipo: 'LOCAL',
+                sede: 'Arlequín',
+                formato: '3G',
+                estado: 'PRÓXIMO',
+                flyer: 'default.png',
+                ubicacion: 'Arlequín - Plaza Alameda',
+                mapa: 'https://maps.app.goo.gl/o5qQzom2U7u1C8yQ7'
             }
         ];
 
         function formatShortDate(iso) {
-            const [y, m, d] = iso.split('-');
-            return `${d}/${m}/${y}`;
+            const [y, mStr, d] = iso.split('-');
+            const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+            const mIndex = parseInt(mStr, 10) - 1;
+            return `${d}/${meses[mIndex]}`; // Retorna formato 04/Ene
         }
 
         function parseISOToDate(iso) {
@@ -566,8 +722,8 @@
             return `${monthNames[m]} ${y}`;
         }
 
-        function getTypeImage(titulo) {
-            const info = getEventTypeInfo(titulo);
+        function getTypeImage(tipo) {
+            const info = getEventTypeInfo(tipo);
             return info.img || '';
         }
 
@@ -609,33 +765,33 @@
                 const safeFlyer = (ev.flyer || '').replace(/'/g, "\\'");
                 const safeUbic = (ev.ubicacion || '').replace(/'/g, "\\'");
                 const safeMapa = (ev.mapa || '').replace(/'/g, "\\'");
-                const typeInfo = getEventTypeInfo(ev.titulo);
+                const typeInfo = getEventTypeInfo(ev.tipo);
                 const typeImg = typeInfo.img || '';
                 const typeKey = typeInfo.key || 'default';
 
                 return `
-                    <article class="cal-card">
-                        <div class="cal-card-top">
-                            <h3 class="cal-card-title">${ev.titulo}</h3>
-                            <div class="cal-card-date">${formatShortDate(ev.fecha)}</div>
-                        </div>
-                        <div class="cal-card-meta">${ev.sede} | ${ev.formato} ${ev.estado ? `| ${ev.estado}` : ''}</div>
-                        ${ev.ubicacion ? `<div class="cal-card-location">${ev.ubicacion}</div>` : ''}
-                        ${typeImg ? `
-                            <div class="cal-card-img-wrap cal-card-img-wrap--${typeKey}">
-                                <img class="cal-card-img" src="${typeImg}" alt="Tipo de torneo" onerror="this.parentNode && this.parentNode.remove()">
-                            </div>
-                        ` : ''}
-                        <div class="cal-card-actions">
-                            <button class="cal-link primary" onclick="openFlyer('${safeFlyer}', '${safeUbic}', '${safeMapa}')">
-                                <i data-lucide="image"></i> Ver flyer
-                            </button>
-                            <a class="cal-link" href="${ev.mapa || 'https://maps.google.com'}" target="_blank" rel="noopener">
-                                <i data-lucide="map-pin"></i> Mapa
-                            </a>
-                        </div>
-                    </article>
-                `;
+        <article class="cal-card">
+            <div class="cal-card-top">
+                <h3 class="cal-card-title">${ev.titulo}</h3>
+                <div class="cal-day-badge">${formatShortDate(ev.fecha)}</div>
+            </div>
+            <div class="cal-card-meta">${ev.sede} | ${ev.formato} ${ev.estado ? `| ${ev.estado}` : ''}</div>
+            ${ev.ubicacion ? `<div class="cal-card-location">${ev.ubicacion}</div>` : ''}
+            ${typeImg ? `
+                <div class="cal-card-img-wrap cal-card-img-wrap--${typeKey}">
+                    <img class="cal-card-img" src="${typeImg}" alt="Tipo de torneo" onerror="this.parentNode && this.parentNode.remove()">
+                </div>
+            ` : ''}
+            <div class="cal-card-actions">
+                <button class="cal-link primary" onclick="openFlyer('${safeFlyer}', '${safeUbic}', '${safeMapa}')">
+                    <i data-lucide="image"></i> Ver flyer
+                </button>
+                <a class="cal-link" href="${ev.mapa || 'https://maps.google.com'}" target="_blank" rel="noopener">
+                    <i data-lucide="map-pin"></i> Mapa
+                </a>
+            </div>
+        </article>
+    `;
             }).join('');
 
             if (window.lucide && window.lucide.createIcons) {
@@ -643,8 +799,8 @@
             }
         }
 
-        function getEventTypeInfo(titulo) {
-            const t = (titulo || '').toUpperCase();
+        function getEventTypeInfo(tipo) {
+            const t = (tipo || '').toUpperCase();
 
             // Imágenes de tipo esperadas en la raíz del sitio:
             // minor.png, local.png, reto.png, copa.png, chill.png
