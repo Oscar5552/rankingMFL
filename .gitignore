@@ -1,0 +1,9 @@
+
+# Agents / tool state
+AGENTS.md
+agents/
+.opencode/
+
+# Logs
+*.log
+logs/
